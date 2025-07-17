@@ -165,26 +165,6 @@ alzheimer-disease-classification/
 3. **Statistical Testing**: Confidence intervals and significance tests
 4. **Error Analysis**: Detailed analysis of misclassified cases
 
-## 🧪 Experimental Results
-
-### Ablation Studies
-- **Data Augmentation Impact**: +15% accuracy improvement
-- **Transfer Learning**: +23% over training from scratch
-- **Architecture Comparison**: EfficientNet-B0 vs ResNet50 vs VGG16
-
-### Computational Efficiency
-- **Training Time**: 2.5 hours on NVIDIA T4 GPU
-- **Inference Time**: 45ms per image
-- **Model Size**: 20.3 MB (optimized for deployment)
-- **Memory Usage**: 2.1 GB during training
-
-## 🙏 Acknowledgments
-
-- **Dataset**: Kaggle Alzheimer MRI Preprocessed Dataset
-- **Framework**: PyTorch and torchvision
-- **Inspiration**: Medical imaging research community
-- **Compute**: GPU support through Kaggle
-
 ---
 
 ⭐ **If you find this project useful, please consider giving it a star!** ⭐
