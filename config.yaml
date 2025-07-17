@@ -1,0 +1,135 @@
+# Configuration file for Alzheimer's Disease Classification Project
+
+# Data Configuration
+data:
+  augmented_path: "/kaggle/input/augmented-alzheimer-mri-dataset/AugmentedAlzheimerDataset"
+  original_path: "/kaggle/input/augmented-alzheimer-mri-dataset/OriginalDataset"
+  sample_path: "data/sample/"
+  
+  # Class mapping
+  classes:
+    - "MildDemented"
+    - "ModerateDemented" 
+    - "NonDemented"
+    - "VeryMildDemented"
+  
+  # Data split ratios
+  train_split: 0.8
+  val_split: 0.2
+  
+  # Data loading
+  batch_size: 32
+  num_workers: 4
+  pin_memory: true
+
+# Model Configuration
+model:
+  name: "efficientnet_b0"
+  num_classes: 4
+  pretrained: true
+  dropout_rate: 0.2
+  
+  # Image preprocessing
+  input_size: 224
+  normalization:
+    mean: [0.5, 0.5, 0.5]
+    std: [0.5, 0.5, 0.5]
+
+# Training Configuration
+training:
+  optimizer: "Adam"
+  learning_rate: 1e-4
+  weight_decay: 1e-5
+  epochs: 10
+  
+  # Learning rate scheduling
+  scheduler:
+    type: "ReduceLROnPlateau"
+    patience: 3
+    factor: 0.5
+    min_lr: 1e-7
+  
+  # Early stopping
+  early_stopping:
+    patience: 5
+    min_delta: 0.001
+  
+  # Loss function
+  loss_function: "CrossEntropyLoss"
+  
+  # Gradient clipping
+  gradient_clipping:
+    enabled: true
+    max_norm: 1.0
+
+# Evaluation Configuration
+evaluation:
+  metrics:
+    - "accuracy"
+    - "precision"
+    - "recall"
+    - "f1_score"
+    - "confusion_matrix"
+  
+  # Model selection criteria
+  selection_metric: "val_accuracy"
+  selection_mode: "max"
+
+# Logging Configuration
+logging:
+  level: "INFO"
+  log_dir: "results/logs"
+  
+  # Experiment tracking
+  wandb:
+    enabled: false
+    project: "alzheimer-classification"
+    entity: "your-username"
+  
+  tensorboard:
+    enabled: true
+    log_dir: "results/tensorboard"
+
+# Checkpoint Configuration
+checkpoint:
+  save_dir: "models/checkpoints"
+  save_best: true
+  save_frequency: 1
+  max_checkpoints: 5
+
+# Inference Configuration
+inference:
+  model_path: "models/final/best_model.pth"
+  confidence_threshold: 0.5
+  batch_size: 1
+  
+  # Output format
+  output_format: "json"
+  save_predictions: true
+
+# Deployment Configuration
+deployment:
+  api:
+    host: "0.0.0.0"
+    port: 8000
+    debug: false
+  
+  streamlit:
+    host: "0.0.0.0"
+    port: 8501
+    
+  docker:
+    image_name: "alzheimer-classifier"
+    tag: "latest"
+
+# Environment Configuration
+environment:
+  device: "auto"  # auto, cpu, cuda
+  seed: 42
+  deterministic: true
+  
+  # Paths
+  data_dir: "data"
+  output_dir: "results"
+  model_dir: "models"
+  log_dir: "logs"
